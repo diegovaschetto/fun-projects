@@ -1,3 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-require("../../styles/main.css");
+import '../../styles/main.css';
+import '../../images/pipe.png';
+import mainGeneratorCoupleOfPipes from './pipe';
+mainGeneratorCoupleOfPipes();
