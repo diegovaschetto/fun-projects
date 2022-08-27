@@ -1,4 +1,4 @@
 import '../../styles/main.css';
 import '../../images/pipe.png';
 import mainGeneratorCoupleOfPipes from './pipe';
-mainGeneratorCoupleOfPipes();
+setInterval(mainGeneratorCoupleOfPipes, 1000);

@@ -37,9 +37,12 @@ class Pipe implements PipeInt {
 
 
 let nextMovement = (pipe1: HTMLImageElement , pipe2: HTMLImageElement) => {
-    let pipe1
+    let pipe1Position = parseInt(pipe1.style.right)
+    let pipe2Position = parseInt(pipe2.style.right)
     setTimeout(() => {
-        
+        pipe1.style.right = `${pipe1Position+1}%` 
+        pipe2.style.right = `${pipe2Position+1}%`
+        logicMotionPipes(pipe1, pipe2)
     }, 50);
 }
 
@@ -47,10 +50,16 @@ let nextMovement = (pipe1: HTMLImageElement , pipe2: HTMLImageElement) => {
  * fn that display on or off the pipes relying on their position and 
  * applies the movement 
  */
-let logicMotionPipes = (pipe1: string , pipe2: string) => {
-    if(pipe1 > "100%" || pipe1.style.right < "0%"){
-        pipe1.style.display ="none"
-        pipe2.style.display ="none"
+let logicMotionPipes = (pipe1: HTMLImageElement , pipe2: HTMLImageElement) => {
+    
+    if(parseInt(pipe1.style.right) > 100 || parseInt(pipe1.style.right) < 0){
+        if (parseInt(pipe1.style.right) > 100) {
+            pipe1.remove()
+            pipe2.remove()
+            return
+        } else {
+            nextMovement(pipe1, pipe2);
+            }
     } else {
         nextMovement(pipe1, pipe2);
     }
@@ -69,6 +78,9 @@ let createPipes = (pipeObj : PipeInt) => {
     
     pipe1.style.height = `${pipeObj.heightPipe1}%`
     pipe2.style.height = `${pipeObj.heightPipe2}%`
+
+    pipe1.style.right = "-20%"
+    pipe2.style.right = "-20%"
     
     pipe1.className = "pipe-1-down-direction"
     pipe2.className = "pipe-2-up-direction"
@@ -76,7 +88,7 @@ let createPipes = (pipeObj : PipeInt) => {
     gameContainer_div.append(pipe1)
     gameContainer_div.append(pipe2)
 
-    logicMotionPipes(pipe1.style.right, pipe2.style.right)
+    logicMotionPipes(pipe1, pipe2)
 }
 
 /**
@@ -90,6 +102,4 @@ let mainGeneratorCoupleOfPipes = () => {
 }
 
 
-/* setInterval(createCoupleOfPipes, 5000);
-*/
 export default mainGeneratorCoupleOfPipes;
