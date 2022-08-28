@@ -1,8 +1,7 @@
 import '../../styles/main.css'
 import '../../images/pipe.png'
-import mainGeneratorCoupleOfPipes from './pipe'
+import mainPipe from "./pipe"
+import Bird from "./bird"
 
-setInterval(mainGeneratorCoupleOfPipes,1000)
-
-
-
+setInterval(mainPipe,3000)
+window.addEventListener("click", Bird.moveUp)

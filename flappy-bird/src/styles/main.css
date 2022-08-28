@@ -62,3 +62,12 @@ body{
     bottom: 0;
 }
 
+#flappy-bird {
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+}
+
