@@ -18,7 +18,7 @@ class MotionBird {
     static moveUp = () =>  {
         clearInterval(this.handler)
         this.counterDec = 1;
-        if (bird_div.hasAttribute("style") && this.currentPosition > 0 ) {
+        if (bird_div.hasAttribute("style")) {
             this.currentPosition = parseInt(bird_div.style.top)
             bird_div.style.top = `${this.currentPosition-5}%`
         } else {

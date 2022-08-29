@@ -15,7 +15,7 @@ MotionBird.moveDown = () => {
 MotionBird.moveUp = () => {
     clearInterval(_a.handler);
     _a.counterDec = 1;
-    if (bird_div.hasAttribute("style") && _a.currentPosition > 0) {
+    if (bird_div.hasAttribute("style")) {
         _a.currentPosition = parseInt(bird_div.style.top);
         bird_div.style.top = `${_a.currentPosition - 5}%`;
     }

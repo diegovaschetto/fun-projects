@@ -1,4 +1,4 @@
-
+import gameOver from "./game-over"
 const gameContainer_div = document.getElementById("container-game") as HTMLDivElement
 
 /**
@@ -37,13 +37,14 @@ class Pipe implements PipeInt {
 
 
 let nextMovement = (pipe1: HTMLImageElement , pipe2: HTMLImageElement) => {
-    let pipe1Position = parseInt(pipe1.style.right)
-    let pipe2Position = parseInt(pipe2.style.right)
+    let pipe1Position = parseFloat(pipe1.style.right)
+    let pipe2Position = parseFloat(pipe2.style.right)
     setTimeout(() => {
-        pipe1.style.right = `${pipe1Position+1}%` 
-        pipe2.style.right = `${pipe2Position+1}%`
+        pipe1.style.right = `${pipe1Position+0.5}%` 
+        pipe2.style.right = `${pipe2Position+0.5}%`
+        gameOver(pipe1, pipe2);
         logicMotionPipes(pipe1, pipe2)
-    }, 50);
+    }, 25);
 }
 
 /**
@@ -52,8 +53,8 @@ let nextMovement = (pipe1: HTMLImageElement , pipe2: HTMLImageElement) => {
  */
 let logicMotionPipes = (pipe1: HTMLImageElement , pipe2: HTMLImageElement) => {
     
-    if(parseInt(pipe1.style.right) > 100 || parseInt(pipe1.style.right) < 0){
-        if (parseInt(pipe1.style.right) > 100) {
+    if(parseFloat(pipe1.style.right) > 100 || parseFloat(pipe1.style.right) < 0){
+        if (parseFloat(pipe1.style.right) > 100) {
             pipe1.remove()
             pipe2.remove()
             return
