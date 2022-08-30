@@ -1,3 +1,7 @@
+import pipesMotion from "./main";
+import { startGame } from "./main";
+import MotionBird from "./bird";
+
 const bird_div = document.getElementById("flappy-bird") as HTMLDivElement;
 
 /**
@@ -6,22 +10,35 @@ const bird_div = document.getElementById("flappy-bird") as HTMLDivElement;
  * @param pipe1
  * @param pipe2
  */
-let checkGameOver = (pipe1: HTMLImageElement, pipe2: HTMLImageElement) => {
+let gameOver = (pipe1: HTMLImageElement, pipe2: HTMLImageElement) => {
     let rectPipeDown = pipe1.getBoundingClientRect();
     let rectPipeUp = pipe2.getBoundingClientRect();
     let rectBird = bird_div.getBoundingClientRect();
     let diffRightBird = rectBird.right + rectBird.width
     let diffHeightBird = rectBird.y + rectBird.height
     let diffHeightPipeDown = rectPipeDown.y + rectPipeDown.height 
-    let diffHeightPipeUp = rectPipeUp.y + rectPipeUp.height 
-
+    let diffHeightPipeUp = rectPipeUp.y + rectPipeUp.height
+    
     if (
         ((rectPipeUp.right >= rectBird.right && rectPipeUp.right <= diffRightBird) &&
         (diffHeightBird > rectPipeUp.y || rectBird.y < diffHeightPipeDown )) || 
-        (rectBird.y < rectPipeDown.y || rectBird.y > diffHeightPipeUp) 
-    ) {
-        console.log("game over");
+        (rectBird.y < rectPipeDown.y || rectBird.y + rectBird.height > diffHeightPipeUp) 
+        ) {
+        window.removeEventListener("keyup", startGame)
+        clearInterval(MotionBird.handler)
+        if (rectBird.y + rectBird.height > diffHeightPipeUp) {
+            bird_div.removeAttribute("style")
+            bird_div.classList.remove("set-start-flappy")
+            bird_div.style.bottom = "0%"
+        }
+
+        if (rectBird.y < rectPipeDown.y) {
+            bird_div.removeAttribute("style")
+            bird_div.style.top = "0%"
+        }
+        clearInterval(pipesMotion)
+
     }
 };
 
-export default checkGameOver;
+export default gameOver;

@@ -3,9 +3,10 @@ import '../../images/pipe.png'
 import mainPipe from "./pipe"
 import Bird from "./bird"
 
-setInterval(mainPipe,3000)
 
+export let startGame = () => Bird.moveUp()
 
-window.addEventListener("keypress", () => {
-    Bird.moveUp();
-})
+let pipesMotion = setInterval(mainPipe,3000)
+window.addEventListener("keyup", startGame)
+
+export default pipesMotion

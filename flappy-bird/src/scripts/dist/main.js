@@ -2,7 +2,7 @@ import '../../styles/main.css';
 import '../../images/pipe.png';
 import mainPipe from "./pipe";
 import Bird from "./bird";
-setInterval(mainPipe, 3000);
-window.addEventListener("keypress", () => {
-    Bird.moveUp();
-});
+export let startGame = () => Bird.moveUp();
+let pipesMotion = setInterval(mainPipe, 3000);
+window.addEventListener("keyup", startGame);
+export default pipesMotion;

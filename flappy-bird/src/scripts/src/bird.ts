@@ -21,26 +21,22 @@ class MotionBird {
     static handler: ReturnType<typeof setInterval>;
     
     static moveDown = () =>{
-        MotionBird.currentPosition = parseInt(bird_div.style.top)
-        if (MotionBird.currentPosition < 100) {
-            bird_div.style.top = `${MotionBird.currentPosition+(MotionBird.counterDec++)}%`
-        } else {
-            clearInterval(MotionBird.handler)
-        }
+        MotionBird.currentPosition = parseFloat(bird_div.style.top)
+        bird_div.style.top = `${MotionBird.currentPosition+(MotionBird.counterDec+=0.1)}%`
     }
     
     static moveUp = () =>  {
         clearInterval(MotionBird.handler)
-        MotionBird.counterDec = 1;
+        MotionBird.counterDec = 0.1;
         if (bird_div.hasAttribute("style")) {
-            MotionBird.currentPosition = parseInt(bird_div.style.top)
+            MotionBird.currentPosition = parseFloat(bird_div.style.top)
             bird_div.style.top = `${MotionBird.currentPosition-5}%`
         } else {
             bird_div.style.top = "50%"
-            MotionBird.currentPosition = parseInt(bird_div.style.top)
+            MotionBird.currentPosition = parseFloat(bird_div.style.top)
             bird_div.style.top = `${MotionBird.currentPosition-5}%`
         }
-        MotionBird.handler = (setInterval(MotionBird.moveDown, 200))
+        MotionBird.handler = (setInterval(MotionBird.moveDown, 50))
     }
 }
 

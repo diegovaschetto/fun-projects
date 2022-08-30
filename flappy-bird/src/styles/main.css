@@ -67,7 +67,10 @@ body{
     height: 30px;
     background-color: red;
     position: absolute;
-    top: 50%;
     right: 50%;
+}
+
+.set-start-flappy {
+    top: 50%;
 }
 
