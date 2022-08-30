@@ -10,7 +10,7 @@ let randomNumber = (min, max) => {
 };
 class Pipe {
     constructor() {
-        this.hole = randomNumber(15, 25);
+        this.hole = randomNumber(20, 30);
     }
     generateHeightPipesBasedOnHole(pipe) {
         let remainSpace = 100 - this.hole;

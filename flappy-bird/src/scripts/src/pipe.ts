@@ -20,7 +20,7 @@ class Pipe implements PipeInt {
     hole: number 
 
     constructor () {
-        this.hole = randomNumber(15,25)
+        this.hole = randomNumber(20,30)
     }
 
     generateHeightPipesBasedOnHole (pipe: PipeInt) {

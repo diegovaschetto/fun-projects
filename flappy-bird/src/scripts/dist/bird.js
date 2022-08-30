@@ -1,35 +1,40 @@
-var _a;
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var MotionBird_1;
 const bird_div = document.getElementById("flappy-bird");
-class MotionBird {
-}
-_a = MotionBird;
+let decoratorClass = () => {
+    return (constructor) => { constructor; };
+};
+let MotionBird = MotionBird_1 = class MotionBird {
+};
 MotionBird.moveDown = () => {
-    _a.currentPosition = parseInt(bird_div.style.top);
-    if (_a.currentPosition < 100) {
-        bird_div.style.top = `${_a.currentPosition + (_a.counterDec++)}%`;
+    MotionBird_1.currentPosition = parseInt(bird_div.style.top);
+    if (MotionBird_1.currentPosition < 100) {
+        bird_div.style.top = `${MotionBird_1.currentPosition + (MotionBird_1.counterDec++)}%`;
     }
     else {
-        clearInterval(_a.handler);
+        clearInterval(MotionBird_1.handler);
     }
 };
 MotionBird.moveUp = () => {
-    clearInterval(_a.handler);
-    _a.counterDec = 1;
+    clearInterval(MotionBird_1.handler);
+    MotionBird_1.counterDec = 1;
     if (bird_div.hasAttribute("style")) {
-        _a.currentPosition = parseInt(bird_div.style.top);
-        bird_div.style.top = `${_a.currentPosition - 5}%`;
+        MotionBird_1.currentPosition = parseInt(bird_div.style.top);
+        bird_div.style.top = `${MotionBird_1.currentPosition - 5}%`;
     }
     else {
         bird_div.style.top = "50%";
-        _a.currentPosition = parseInt(bird_div.style.top);
-        bird_div.style.top = `${_a.currentPosition - 5}%`;
+        MotionBird_1.currentPosition = parseInt(bird_div.style.top);
+        bird_div.style.top = `${MotionBird_1.currentPosition - 5}%`;
     }
-    _a.handler = (setInterval(_a.moveDown, 200));
+    MotionBird_1.handler = (setInterval(MotionBird_1.moveDown, 200));
 };
-/* interface Bird {
-    counter:number;
-    currentPosition? : number;
-    handler?: ReturnType<typeof setInterval>;
-}
- */
+MotionBird = MotionBird_1 = __decorate([
+    decoratorClass()
+], MotionBird);
 export default MotionBird;
