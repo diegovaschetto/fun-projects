@@ -1,6 +1,7 @@
 import pipesMotion from "./main";
 import { startGame } from "./main";
 import MotionBird from "./bird";
+import { addPoint } from "./score";
 
 const bird_div = document.getElementById("flappy-bird") as HTMLDivElement;
 
@@ -37,8 +38,12 @@ let gameOver = (pipe1: HTMLImageElement, pipe2: HTMLImageElement) => {
             bird_div.style.top = "0%"
         }
         clearInterval(pipesMotion)
-
+        return false;
     }
+    if (rectPipeUp.right < diffRightBird) {
+        addPoint()
+    }
+    return true
 };
 
 export default gameOver;

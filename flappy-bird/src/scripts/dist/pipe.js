@@ -22,14 +22,19 @@ class Pipe {
         pipe.heightPipe2 = remainSpace - pipe.heightPipe1;
     }
 }
+let stopGame;
 let nextMovement = (pipe1, pipe2) => {
     let pipe1Position = parseFloat(pipe1.style.right);
     let pipe2Position = parseFloat(pipe2.style.right);
     setTimeout(() => {
         pipe1.style.right = `${pipe1Position + 0.5}%`;
         pipe2.style.right = `${pipe2Position + 0.5}%`;
-        gameOver(pipe1, pipe2);
-        logicMotionPipes(pipe1, pipe2);
+        if (stopGame === false) {
+            return;
+        }
+        stopGame = gameOver(pipe1, pipe2);
+        if (stopGame)
+            logicMotionPipes(pipe1, pipe2);
     }, 25);
 };
 /**

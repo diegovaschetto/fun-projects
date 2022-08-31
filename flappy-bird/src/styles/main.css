@@ -68,9 +68,18 @@ body{
     background-color: red;
     position: absolute;
     right: 50%;
+    z-index: 20;
 }
 
 .set-start-flappy {
     top: 50%;
+}
+
+#score {
+    position: absolute;
+    right: 5%;
+    top: 90%;
+    width: 20%;
+    font-size: 20px;
 }
 
