@@ -35,7 +35,7 @@ class Pipe implements PipeInt {
     }
 }
 
-let stopGame:boolean;
+let stopGame:boolean = true;
 
 let nextMovement = (pipe1: HTMLImageElement , pipe2: HTMLImageElement) => {
     let pipe1Position = parseFloat(pipe1.style.right)
@@ -43,9 +43,7 @@ let nextMovement = (pipe1: HTMLImageElement , pipe2: HTMLImageElement) => {
     setTimeout(() => {
         pipe1.style.right = `${pipe1Position+0.5}%` 
         pipe2.style.right = `${pipe2Position+0.5}%`
-        if (stopGame === false) {
-            return
-        }
+        if (!stopGame) return
         stopGame = gameOver(pipe1, pipe2);
         if(stopGame) logicMotionPipes(pipe1, pipe2)
     }, 25);
@@ -56,15 +54,10 @@ let nextMovement = (pipe1: HTMLImageElement , pipe2: HTMLImageElement) => {
  * applies the movement 
  */
 let logicMotionPipes = (pipe1: HTMLImageElement , pipe2: HTMLImageElement) => {
-    
-    if(parseFloat(pipe1.style.right) > 100 || parseFloat(pipe1.style.right) < 0){
-        if (parseFloat(pipe1.style.right) > 100) {
-            pipe1.remove()
-            pipe2.remove()
-            return
-        } else {
-            nextMovement(pipe1, pipe2);
-            }
+    if(parseFloat(pipe1.style.right) > 100){
+        pipe1.remove()
+        pipe2.remove()
+        return
     } else {
         nextMovement(pipe1, pipe2);
     }

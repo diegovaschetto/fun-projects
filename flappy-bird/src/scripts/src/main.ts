@@ -6,7 +6,7 @@ import Bird from "./bird"
 
 export let startGame = () => Bird.moveUp()
 
-let pipesMotion = setInterval(mainPipe,3000)
+let pipesMotion = setInterval(mainPipe,2000)
 window.addEventListener("keyup", startGame)
 
 export default pipesMotion

@@ -3,6 +3,7 @@ import { startGame } from "./main";
 import MotionBird from "./bird";
 import { addPoint } from "./score";
 const bird_div = document.getElementById("flappy-bird");
+let pastPipeArray = [];
 /**
  * fn that check the position of the bird respect to that of pipes
  * if bird's position overlap one of the pipe's position -> game over
@@ -10,9 +11,20 @@ const bird_div = document.getElementById("flappy-bird");
  * @param pipe2
  */
 let gameOver = (pipe1, pipe2) => {
-    let rectPipeDown = pipe1.getBoundingClientRect();
-    let rectPipeUp = pipe2.getBoundingClientRect();
-    let rectBird = bird_div.getBoundingClientRect();
+    let rectPipeDown;
+    let rectPipeUp;
+    let rectBird;
+    if (pastPipeArray.every((pastPipe) => pipe2 !== pastPipe)) {
+        rectPipeDown = pipe1.getBoundingClientRect();
+        rectPipeUp = pipe2.getBoundingClientRect();
+        rectBird = bird_div.getBoundingClientRect();
+    }
+    if (rectPipeDown === undefined)
+        return true;
+    if (rectPipeUp === undefined)
+        return true;
+    if (rectBird === undefined)
+        return true;
     let diffRightBird = rectBird.right + rectBird.width;
     let diffHeightBird = rectBird.y + rectBird.height;
     let diffHeightPipeDown = rectPipeDown.y + rectPipeDown.height;
@@ -34,8 +46,10 @@ let gameOver = (pipe1, pipe2) => {
         clearInterval(pipesMotion);
         return false;
     }
-    if (rectPipeUp.right < diffRightBird) {
+    if (rectPipeUp.right < rectBird.right && pastPipeArray.every((pastPipe) => pipe2 !== pastPipe)) {
         addPoint();
+        let pastPipe = pipe2;
+        pastPipeArray.push(pastPipe);
     }
     return true;
 };
