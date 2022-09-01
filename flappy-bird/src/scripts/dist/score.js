@@ -1,9 +1,15 @@
 const result_span = document.getElementById("update-result");
 const score = {
-    point: 0
+    point: 0,
+    addPoint: function (ifReset) {
+        if (ifReset) {
+            this.point = 0;
+            result_span.textContent = `${this.point}`;
+        }
+        else {
+            this.point++;
+            result_span.textContent = `${this.point}`;
+        }
+    }
 };
-let addPoint = () => {
-    score.point++;
-    result_span.textContent = `${score.point}`;
-};
-export { addPoint };
+export { score };

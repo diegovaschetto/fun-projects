@@ -83,3 +83,23 @@ body{
     font-size: 20px;
 }
 
+#banner{
+    width: 30%;
+    height: 20%;
+    background-color: midnightblue;
+    opacity: 0.9;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    z-index: 50;
+}
+
+#banner > button{
+    width: 20%;
+    height: 10%;
+    color: black;
+} 
+
+.hidden {
+    display: none;
+}

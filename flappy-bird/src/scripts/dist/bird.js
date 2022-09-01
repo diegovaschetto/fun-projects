@@ -18,15 +18,8 @@ MotionBird.moveDown = () => {
 MotionBird.moveUp = () => {
     clearInterval(MotionBird_1.handler);
     MotionBird_1.counterDec = 0.1;
-    if (bird_div.hasAttribute("style")) {
-        MotionBird_1.currentPosition = parseFloat(bird_div.style.top);
-        bird_div.style.top = `${MotionBird_1.currentPosition - 5}%`;
-    }
-    else {
-        bird_div.style.top = "50%";
-        MotionBird_1.currentPosition = parseFloat(bird_div.style.top);
-        bird_div.style.top = `${MotionBird_1.currentPosition - 5}%`;
-    }
+    MotionBird_1.currentPosition = parseFloat(bird_div.style.top);
+    bird_div.style.top = `${MotionBird_1.currentPosition - 5}%`;
     MotionBird_1.handler = (setInterval(MotionBird_1.moveDown, 50));
 };
 MotionBird = MotionBird_1 = __decorate([
