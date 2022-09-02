@@ -1,5 +1,5 @@
 import gameOver from "./game-over";
-const gameContainer_div = document.getElementById("container-game") as HTMLDivElement;
+import { gameContainer_div } from "./const";
 
 /**
  * useful to generate a random number among min and max

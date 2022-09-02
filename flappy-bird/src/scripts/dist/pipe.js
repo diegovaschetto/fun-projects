@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var Pipe_1;
 import gameOver from "./game-over";
-const gameContainer_div = document.getElementById("container-game");
+import { gameContainer_div } from "./const";
 /**
  * useful to generate a random number among min and max
  * @param min

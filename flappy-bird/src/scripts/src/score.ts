@@ -1,4 +1,4 @@
-const result_span = document.getElementById("update-result") as HTMLSpanElement
+import { result_span } from "./const"
 
 interface Score<T> {
     point : T

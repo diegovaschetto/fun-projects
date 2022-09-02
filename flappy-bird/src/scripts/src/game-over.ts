@@ -2,9 +2,8 @@
 import { startGame } from "./main";
 import MotionBird from "./bird";
 import { score } from "./score";
+import { bird_div, startBanner } from "./const";
 
-const bird_div = document.getElementById("flappy-bird") as HTMLDivElement;
-const startBanner = document.getElementById("banner") as HTMLDivElement;
 let pastPipeArray: HTMLImageElement[] = [];
 
 /**
@@ -55,6 +54,7 @@ let gameOver = (
         }
         clearInterval(pipesInt);
         startBanner.classList.remove("hidden");
+        pastPipeArray.length = 0;
         return false;
     }
     if (

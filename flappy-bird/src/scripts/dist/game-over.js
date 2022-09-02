@@ -2,8 +2,7 @@
 import { startGame } from "./main";
 import MotionBird from "./bird";
 import { score } from "./score";
-const bird_div = document.getElementById("flappy-bird");
-const startBanner = document.getElementById("banner");
+import { bird_div, startBanner } from "./const";
 let pastPipeArray = [];
 /**
  * fn that check the position of the bird respect to that of pipes
@@ -44,6 +43,7 @@ let gameOver = (pipe1, pipe2, pipesInt) => {
         }
         clearInterval(pipesInt);
         startBanner.classList.remove("hidden");
+        pastPipeArray.length = 0;
         return false;
     }
     if (rectPipeUp.right < rectBird.right &&

@@ -1,4 +1,4 @@
-const bird_div = document.getElementById("flappy-bird") as HTMLDivElement
+import { bird_div } from "./const";
 
 interface Bird  {
     counterDec : number;

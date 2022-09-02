@@ -3,11 +3,7 @@ import "../../images/pipe.png";
 import mainPipe from "./pipe";
 import Bird from "./bird";
 import { score } from "./score";
-
-const startButton = document.getElementById("start-button") as HTMLButtonElement;
-const startBanner = document.getElementById("banner") as HTMLDivElement;
-const gameContainer_div = document.getElementById("container-game") as HTMLDivElement;
-const bird_div = document.getElementById("flappy-bird") as HTMLDivElement
+import { startButton , startBanner, gameContainer_div , bird_div } from "./const"
 
 export let startGame = () => Bird.moveUp();
 

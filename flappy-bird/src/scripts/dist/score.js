@@ -1,4 +1,4 @@
-const result_span = document.getElementById("update-result");
+import { result_span } from "./const";
 const score = {
     point: 0,
     addPoint: function (ifReset) {

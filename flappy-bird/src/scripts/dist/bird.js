@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var MotionBird_1;
-const bird_div = document.getElementById("flappy-bird");
+import { bird_div } from "./const";
 let decoratorClass = () => {
     return (constructor) => { constructor; };
 };
