@@ -1,4 +1,4 @@
-import { bird_div } from "./const";
+import { bird_div , gravity , bounce } from "./const";
 
 interface Bird  {
     counterDec : number;
@@ -22,14 +22,14 @@ class MotionBird {
     
     static moveDown = () =>{
         MotionBird.currentPosition = parseFloat(bird_div.style.top)
-        bird_div.style.top = `${MotionBird.currentPosition+(MotionBird.counterDec+=0.1)}%`
+        bird_div.style.top = `${MotionBird.currentPosition+(MotionBird.counterDec+=(gravity/10))}%`
     }
     
     static moveUp = () =>  {
         clearInterval(MotionBird.handler)
-        MotionBird.counterDec = 0.1;
+        MotionBird.counterDec = gravity/10;
         MotionBird.currentPosition = parseFloat(bird_div.style.top)
-        bird_div.style.top = `${MotionBird.currentPosition-5}%`
+        bird_div.style.top = `${MotionBird.currentPosition-bounce}%`
         MotionBird.handler = (setInterval(MotionBird.moveDown, 50))
     }
 }

@@ -3,7 +3,7 @@ import "../../images/pipe.png";
 import mainPipe from "./pipe";
 import Bird from "./bird";
 import { score } from "./score";
-import { startButton , startBanner, gameContainer_div , bird_div } from "./const"
+import { startButton , startBanner, gameContainer_div , bird_div, switchLevel } from "./const"
 
 export let startGame = () => Bird.moveUp();
 
@@ -12,6 +12,7 @@ startButton.onclick = () => {
     pipesToWipe.forEach((pipe) => {
         pipe.remove();
     });
+    switchLevel()
     startBanner.classList.add("hidden");
     bird_div.style.top = "50%"
     window.addEventListener("keyup", startGame);

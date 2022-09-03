@@ -1,5 +1,5 @@
 import gameOver from "./game-over";
-import { gameContainer_div } from "./const";
+import { gameContainer_div, timerOfPipes } from "./const";
 
 /**
  * useful to generate a random number among min and max
@@ -10,27 +10,32 @@ let randomNumber = (min: number, max: number): number => {
     return Math.round(Math.random() * (min - max) + max);
 };
 
+interface Motion {
+    (pipe1: HTMLImageElement, pipe2: HTMLImageElement): void
+}
+
 interface PipeIstance {
     heightPipe1?: number;
     heightPipe2?: number;
     hole: number;
     generateHeightPipesBasedOnHole(pipe: PipeIstance): void;
-    nextMovement (pipe1: HTMLImageElement, pipe2: HTMLImageElement): void
-    createPipes(pipeObj: PipeIstance):void
-    logicMotionPipes (pipe1: HTMLImageElement, pipe2: HTMLImageElement):void
+    createPipes(pipeObj: PipeIstance): void;
+    nextMovement : Motion
+    logicMotionPipes : Motion
 }
 
 interface PipeIntGlobal {
-    stopGame: boolean
-    pipesInterval: ReturnType<typeof setInterval>
-    new() : PipeIstance
+    stopGame: boolean;
+    pipesInterval: ReturnType<typeof setInterval>;
+    new (): PipeIstance;
 }
 
-let decorator = <T>() =>{
-    return <U extends T>(constructor: U) => {constructor}
-}
+let decorator = <T>() => {
+    return <U extends T>(constructor: U) => {
+        constructor;
+    };
+};
 
-@decorator<PipeIntGlobal>()
 class Pipe {
     hole: number;
     static stopGame: boolean = true;
@@ -50,12 +55,40 @@ class Pipe {
         }
         pipe.heightPipe2 = remainSpace - pipe.heightPipe1;
     }
+}
+
+@decorator<PipeIntGlobal>()
+class logicPipe extends Pipe {
+    nextMovement : Motion = (pipe1: HTMLImageElement, pipe2: HTMLImageElement) : void => {
+        let pipe1Position = parseFloat(pipe1.style.right);
+        let pipe2Position = parseFloat(pipe2.style.right);
+        setTimeout(() => {
+            if (!Pipe.stopGame) return;
+            pipe1.style.right = `${pipe1Position + 0.5}%`;
+            pipe2.style.right = `${pipe2Position + 0.5}%`;
+            Pipe.stopGame = gameOver(pipe1, pipe2, Pipe.pipesInterval);
+            if (Pipe.stopGame) this.logicMotionPipes(pipe1, pipe2);
+        }, 25);
+    };
+
+    /**
+     * fn that display on or off the pipes relying on their position and
+     * applies the movement
+     */
+    logicMotionPipes : Motion = (pipe1: HTMLImageElement, pipe2: HTMLImageElement) => {
+        if (parseFloat(pipe1.style.right) > 100) {
+            pipe1.remove();
+            pipe2.remove();
+        } else {
+            this.nextMovement(pipe1, pipe2);
+        }
+    };
 
     /**
      * this fn create a element in the dom w/ the sizes storage in the pipe object
      */
     createPipes = (pipeObj: PipeIstance) => {
-        this.generateHeightPipesBasedOnHole(pipeObj);
+        super.generateHeightPipesBasedOnHole(pipeObj);
         Pipe.stopGame = true;
         let pipe1 = document.createElement("img");
         let pipe2 = document.createElement("img");
@@ -77,31 +110,6 @@ class Pipe {
 
         this.logicMotionPipes(pipe1, pipe2);
     };
-
-    nextMovement = (pipe1: HTMLImageElement, pipe2: HTMLImageElement) => {
-        let pipe1Position = parseFloat(pipe1.style.right);
-        let pipe2Position = parseFloat(pipe2.style.right);
-        setTimeout(() => {
-            if (!Pipe.stopGame) return;
-            pipe1.style.right = `${pipe1Position + 0.5}%`;
-            pipe2.style.right = `${pipe2Position + 0.5}%`;
-            Pipe.stopGame = gameOver(pipe1, pipe2, Pipe.pipesInterval);
-            if (Pipe.stopGame) this.logicMotionPipes(pipe1, pipe2);
-        }, 25);
-    };
-
-    /**
-     * fn that display on or off the pipes relying on their position and
-     * applies the movement
-     */
-    logicMotionPipes = (pipe1: HTMLImageElement, pipe2: HTMLImageElement) => {
-        if (parseFloat(pipe1.style.right) > 100) {
-            pipe1.remove();
-            pipe2.remove();
-        } else {
-            this.nextMovement(pipe1, pipe2);
-        }
-    };
 }
 
 /**
@@ -110,9 +118,9 @@ class Pipe {
  */
 let mainGeneratorCoupleOfPipes = () => {
     Pipe.pipesInterval = setInterval(() => {
-        let pipe = new Pipe();
+        let pipe = new logicPipe();
         pipe.createPipes(pipe);
-    }, 2000);
+    }, timerOfPipes);
 };
 
 export default mainGeneratorCoupleOfPipes;
