@@ -2,7 +2,7 @@
 import { startGame } from "./main";
 import MotionBird from "./bird";
 import { score } from "./score";
-import { bird_div, startBanner } from "./const";
+import { bird_div, startBanner , Handler } from "./const";
 
 let pastPipeArray: HTMLImageElement[] = [];
 
@@ -15,8 +15,8 @@ let pastPipeArray: HTMLImageElement[] = [];
 let gameOver = (
     pipe1: HTMLImageElement,
     pipe2: HTMLImageElement,
-    pipesInt: ReturnType<typeof setInterval>
-) => {
+    pipesInt: Handler
+) : boolean => {
     let rectPipeDown!: DOMRect;
     let rectPipeUp!: DOMRect;
     let rectBird!: DOMRect;
@@ -37,8 +37,8 @@ let gameOver = (
         (rectPipeUp.right >= rectBird.right &&
             rectPipeUp.right <= diffRightBird &&
             (diffHeightBird > rectPipeUp.y || rectBird.y < diffHeightPipeDown)) ||
-        rectBird.y < rectPipeDown.y ||
-        rectBird.y + rectBird.height > diffHeightPipeUp
+       ( rectBird.y < rectPipeDown.y ||
+        rectBird.y + rectBird.height > diffHeightPipeUp)
     ) {
         window.removeEventListener("keyup", startGame);
         clearInterval(MotionBird.handler);
@@ -53,6 +53,7 @@ let gameOver = (
             bird_div.style.top = "0%";
         }
         clearInterval(pipesInt);
+        score.gameOverScore()
         startBanner.classList.remove("hidden");
         pastPipeArray.length = 0;
         return false;

@@ -7,20 +7,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var MotionBird_1;
 import { bird_div, gravity, bounce } from "./const";
 let decoratorClass = () => {
-    return (constructor) => { constructor; };
+    return (constructor) => {
+        constructor;
+    };
 };
 let MotionBird = MotionBird_1 = class MotionBird {
 };
 MotionBird.moveDown = () => {
     MotionBird_1.currentPosition = parseFloat(bird_div.style.top);
-    bird_div.style.top = `${MotionBird_1.currentPosition + (MotionBird_1.counterDec += (gravity / 10))}%`;
+    bird_div.style.top = `${MotionBird_1.currentPosition + (MotionBird_1.counterDec += gravity / 10)}%`;
 };
 MotionBird.moveUp = () => {
     clearInterval(MotionBird_1.handler);
     MotionBird_1.counterDec = gravity / 10;
     MotionBird_1.currentPosition = parseFloat(bird_div.style.top);
     bird_div.style.top = `${MotionBird_1.currentPosition - bounce}%`;
-    MotionBird_1.handler = (setInterval(MotionBird_1.moveDown, 50));
+    MotionBird_1.handler = setInterval(MotionBird_1.moveDown, 50);
 };
 MotionBird = MotionBird_1 = __decorate([
     decoratorClass()

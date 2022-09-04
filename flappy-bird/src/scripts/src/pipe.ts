@@ -1,5 +1,5 @@
 import gameOver from "./game-over";
-import { gameContainer_div, timerOfPipes } from "./const";
+import { gameContainer_div, timerOfPipes , Handler} from "./const";
 
 /**
  * useful to generate a random number among min and max
@@ -26,7 +26,7 @@ interface PipeIstance {
 
 interface PipeIntGlobal {
     stopGame: boolean;
-    pipesInterval: ReturnType<typeof setInterval>;
+    pipesInterval: Handler;
     new (): PipeIstance;
 }
 
@@ -39,7 +39,7 @@ let decorator = <T>() => {
 class Pipe {
     hole: number;
     static stopGame: boolean = true;
-    static pipesInterval: ReturnType<typeof setInterval>;
+    static pipesInterval: Handler;
 
     constructor() {
         this.hole = randomNumber(20, 30);
@@ -117,10 +117,14 @@ class logicPipe extends Pipe {
  * of the pipe and the random hole where the flappy will have to pass
  */
 let mainGeneratorCoupleOfPipes = () => {
-    Pipe.pipesInterval = setInterval(() => {
+    setTimeout(() => {
         let pipe = new logicPipe();
         pipe.createPipes(pipe);
-    }, timerOfPipes);
+        Pipe.pipesInterval = setInterval(() => {
+            let pipe = new logicPipe();
+            pipe.createPipes(pipe);
+        }, timerOfPipes);
+    }, 0);
 };
 
 export default mainGeneratorCoupleOfPipes;

@@ -28,8 +28,8 @@ let gameOver = (pipe1, pipe2, pipesInt) => {
     if ((rectPipeUp.right >= rectBird.right &&
         rectPipeUp.right <= diffRightBird &&
         (diffHeightBird > rectPipeUp.y || rectBird.y < diffHeightPipeDown)) ||
-        rectBird.y < rectPipeDown.y ||
-        rectBird.y + rectBird.height > diffHeightPipeUp) {
+        (rectBird.y < rectPipeDown.y ||
+            rectBird.y + rectBird.height > diffHeightPipeUp)) {
         window.removeEventListener("keyup", startGame);
         clearInterval(MotionBird.handler);
         if (rectBird.y + rectBird.height > diffHeightPipeUp) {
@@ -42,6 +42,7 @@ let gameOver = (pipe1, pipe2, pipesInt) => {
             bird_div.style.top = "0%";
         }
         clearInterval(pipesInt);
+        score.gameOverScore();
         startBanner.classList.remove("hidden");
         pastPipeArray.length = 0;
         return false;

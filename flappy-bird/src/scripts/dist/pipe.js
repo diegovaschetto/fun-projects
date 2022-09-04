@@ -93,9 +93,13 @@ logicPipe = __decorate([
  * of the pipe and the random hole where the flappy will have to pass
  */
 let mainGeneratorCoupleOfPipes = () => {
-    Pipe.pipesInterval = setInterval(() => {
+    setTimeout(() => {
         let pipe = new logicPipe();
         pipe.createPipes(pipe);
-    }, timerOfPipes);
+        Pipe.pipesInterval = setInterval(() => {
+            let pipe = new logicPipe();
+            pipe.createPipes(pipe);
+        }, timerOfPipes);
+    }, 0);
 };
 export default mainGeneratorCoupleOfPipes;

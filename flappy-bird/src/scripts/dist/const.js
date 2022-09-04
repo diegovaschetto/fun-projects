@@ -23,10 +23,10 @@ let switchLevel = () => {
         case 3:
             timerOfPipes = 1500;
             gravity = 3;
-            bounce = 12;
+            bounce = 10;
             break;
         default:
             break;
     }
 };
-export { result_span, startBanner, startButton, gameContainer_div, bird_div, levelOfDifficulty_select, timerOfPipes, switchLevel, gravity, bounce };
+export { result_span, startBanner, startButton, gameContainer_div, bird_div, levelOfDifficulty_select, timerOfPipes, switchLevel, gravity, bounce, };
