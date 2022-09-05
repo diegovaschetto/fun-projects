@@ -1,4 +1,5 @@
 import "../../styles/main.css";
+import "../../images/pipe.png"
 import mainPipe from "./pipe";
 import Bird from "./bird";
 import { score } from "./score";
