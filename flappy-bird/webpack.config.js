@@ -13,12 +13,7 @@ module.exports = {
             { test: /.s?css$/, use: [MiniCssExtractPlugin.loader, "css-loader"] },
             {
                 test: /\.(png|svg|jpg|gif|webp)$/,
-                use: {
-                  loader: "file-loader",
-                  options: {
-                    name: "images/[name].[ext]",
-                  },
-                },
+                type:"asset/resource"
               },
             {
                 test: /\.m?js$/,
